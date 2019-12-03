@@ -2,20 +2,11 @@
 
 class Session{
 
-	public function __construct() {
-        session_start();
-    }
+    public $vars;
 
-    public static function put($key, $value){
-        $_SESSION[$key] = $value;
-    }
-
-    public static function get($key){
-        return (isset($_SESSION[$key]) ? $_SESSION[$key] : null);
-    }
-
-    public static function forget($key){
-        unset($_SESSION[$key]);
+    public function __construct() {
+    	session_start();
+        $this->vars = &$_SESSION; //this will still trigger a phpmd warning
     }
 
     public static function destroy() {

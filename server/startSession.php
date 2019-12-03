@@ -18,9 +18,9 @@
 	}
 
 	$user_token=generateRandomString(16);
-	$session->put("token", $user_token);
+	$session->vars['token'] = $user_token; 
 
 	// $_SESSION["token"] = $user_token;
 
-	echo $user_token;
+	print_r($user_token);
 ?>

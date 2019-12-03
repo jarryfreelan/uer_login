@@ -10,18 +10,18 @@
    	$username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
    	$password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
 
-	if(isset($userToken) && $userToken==$session->get('token')){
+	if(isset($userToken) && $userToken==$session->vars['token']){
 		
 		if($username=='admin' && $password=='123456'){
-			echo "Success Login";
+			print_r("Success Login");
 		}else{
-			echo "Invalid Username and password";
+			print_r("Invalid Username and password");
 			$session->destroy();
 			header('Location: ../index.html');
 		}
 
 	}else{
-		echo "Inactivated CSRF Token";
+		print_r("Inactivated CSRF Token");
 		$session->destroy();
 		header('Location: ../index.html');
 	}
