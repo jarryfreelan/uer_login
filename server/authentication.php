@@ -6,9 +6,13 @@
 
    	$session = new Session();
 
-	if(isset($_POST['user_token']) && $_POST['user_token']==$session->get('token')){
+   	$userToken = filter_input(INPUT_POST, 'user_token', FILTER_SANITIZE_SPECIAL_CHARS);
+   	$username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
+   	$password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
+
+	if(isset($userToken) && $userToken==$session->get('token')){
 		
-		if($_POST['username']=='admin' && $_POST['password']=='123456'){
+		if($username=='admin' && $password=='123456'){
 			echo "Success Login";
 		}else{
 			echo "Invalid Username and password";
