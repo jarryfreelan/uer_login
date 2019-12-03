@@ -2,7 +2,7 @@
 	
 	// session_start();
 
-   	require 'session.php';
+   	require_once 'session.php';
 
    	$session = new Session();
 
