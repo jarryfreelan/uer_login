@@ -10,15 +10,24 @@
    	$username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
    	$password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
 
+   	$servername = "localhost";
+	$username = "username";
+	$password = "password";
+	$dbname = "myDB";
+
+	// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	// Check connection
+	if ($conn->connect_error) {
+	    die("Connection failed: " . $conn->connect_error);
+	}
+
+
 	if(isset($userToken) && $userToken==$session->vars['token']){
 		
-		if($username=='admin' && $password=='123456'){
-			print_r("Success Login");
-		}else{
-			print_r("Invalid Username and password");
-			$session->destroy();
-			header('Location: ../index.html');
-		}
+		$sql = 'SELECT * FROM Users WHERE Name ="' + $username + '" AND Pass ="' + $password + '"';
+		$result = $conn->query($sql);
+
 
 	}else{
 		print_r("Inactivated CSRF Token");

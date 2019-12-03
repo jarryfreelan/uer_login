@@ -6,7 +6,7 @@ class Session{
 
     public function __construct() {
     	session_start();
-        $this->vars = &$_SESSION; //this will still trigger a phpmd warning
+        $this->vars = &$_SESSION; 
     }
 
     public static function destroy() {
