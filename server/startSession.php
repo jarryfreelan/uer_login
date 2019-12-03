@@ -1,7 +1,11 @@
 <?php
 
 	ob_start();
-   	session_start();
+   	// session_start();
+
+   	require 'session.php';
+
+   	$session = new Session();
 
 	function generateRandomString($length = 10) {
 	    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -14,8 +18,9 @@
 	}
 
 	$user_token=generateRandomString(16);
+	$session->put("token", $user_token);
 
-	$_SESSION["token"] = $user_token;
+	// $_SESSION["token"] = $user_token;
 
 	echo $user_token;
 ?>

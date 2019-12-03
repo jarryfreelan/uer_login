@@ -1,20 +1,24 @@
 <?php
 	
-	session_start();
+	// session_start();
 
-	if(isset($_POST['user_token']) && $_POST['user_token']==$_SESSION["token"]){
+   	require 'session.php';
+
+   	$session = new Session();
+
+	if(isset($_POST['user_token']) && $_POST['user_token']==$session->get('token')){
 		
 		if($_POST['username']=='admin' && $_POST['password']=='123456'){
 			echo "Success Login";
 		}else{
 			echo "Invalid Username and password";
-			session_destroy();
+			$session->destroy();
 			header('Location: ../index.html');
 		}
 
 	}else{
 		echo "Inactivated CSRF Token";
-		session_destroy();
+		$session->destroy();
 		header('Location: ../index.html');
 	}
 ?>
